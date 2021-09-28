@@ -7,7 +7,7 @@
 			name="viewport"
 			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
 		/>
-		<link type="text/css" rel="stylesheet" href="main.css" />
+		<link type="text/css" rel="stylesheet" href="/examples/main.css" />
 		<style>
 			a {
 				color: #8ff;
@@ -49,7 +49,7 @@
 				top: 40px;
 				left: 0px;
 				right: 0px;
-				font-size: 60px;
+				font-size: 20px;
 				font-weight: bold;
 				color: rgba(255, 255, 255, 0.75);
 				text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
@@ -97,14 +97,20 @@
 		</div>
 
 		<script type="module">
-			import * as THREE from "../build/three.module.js";
+			import * as THREE from "/build/three.module.js";
 
-			import { TWEEN } from "./jsm/libs/tween.module.min.js";
-			import { TrackballControls } from "./jsm/controls/TrackballControls.js";
+			import { TWEEN } from "/examples/jsm/libs/tween.module.min.js";
+			import { TrackballControls } from "/examples/jsm/controls/TrackballControls.js";
 			import {
 				CSS3DRenderer,
 				CSS3DObject,
-			} from "./jsm/renderers/CSS3DRenderer.js";
+			} from "/examples/jsm/renderers/CSS3DRenderer.js";
+			import { data } from "./linkedin_list.js";
+
+			const result = Object.values(data).map(Object.values);
+			const merged = [].concat.apply([], result);
+
+			// console.log(merged);
 
 			const table = [
 				"H",
@@ -699,6 +705,7 @@
 				7,
 			];
 
+			// console.log(table);
 			let camera, scene, renderer;
 			let controls;
 
@@ -720,12 +727,16 @@
 				scene = new THREE.Scene();
 
 				// table
+				// console.log(merged.length);
 
-				for (let i = 0; i < table.length; i += 5) {
+				for (let i = 0; i < 590; i += 5) {
 					const element = document.createElement("div");
 					element.className = "element";
-					element.style.backgroundColor =
-						"rgba(0,127,127," + (Math.random() * 0.5 + 0.25) + ")";
+					if (merged[i + 1] === "M") {
+						element.style.backgroundColor = "navy";
+					} else {
+						element.style.backgroundColor = "hotpink";
+					}
 
 					const number = document.createElement("div");
 					number.className = "number";
@@ -734,13 +745,14 @@
 
 					const symbol = document.createElement("div");
 					symbol.className = "symbol";
-					symbol.textContent = table[i];
+					symbol.textContent = merged[i];
 					element.appendChild(symbol);
 
 					const details = document.createElement("div");
 					details.className = "details";
-					details.innerHTML = table[i + 1] + "<br>" + table[i + 2];
+					details.innerHTML = merged[i + 1] + "<br>" + merged[i + 2];
 					element.appendChild(details);
+					// console.log(merged[i + 1]);
 
 					const objectCSS = new CSS3DObject(element);
 					objectCSS.position.x = Math.random() * 4000 - 2000;
@@ -753,8 +765,8 @@
 					//
 
 					const object = new THREE.Object3D();
-					object.position.x = table[i + 3] * 140 - 1330;
-					object.position.y = -(table[i + 4] * 180) + 990;
+					object.position.x = merged[i + 3] * 140 - 1330;
+					object.position.y = -(merged[i + 4] * 180) + 990;
 
 					targets.table.push(object);
 				}
