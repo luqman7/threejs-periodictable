@@ -79,7 +79,8 @@
     "test-e2e-cov": "node test/e2e/check-coverage.js",
     "test-treeshake": "rollup -c test/rollup.treeshake.config.js",
     "make-screenshot": "node test/e2e/puppeteer.js --make",
-    "prepublishOnly": "node utils/prepublish.js"
+    "prepublishOnly": "node utils/prepublish.js",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [
     "three",
@@ -132,5 +133,8 @@
       "build/three.module.js"
     ],
     "directories": {}
+  },
+  "dependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
