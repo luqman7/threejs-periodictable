@@ -97,15 +97,12 @@
 		</div>
 
 		<script type="module">
-			import * as THREE from "/build/three.module.js";
+			import * as THREE from "/dist/three.module.js";
 
-			import { TWEEN } from "/examples/jsm/libs/tween.module.min.js";
-			import { TrackballControls } from "/examples/jsm/controls/TrackballControls.js";
-			import {
-				CSS3DRenderer,
-				CSS3DObject,
-			} from "/examples/jsm/renderers/CSS3DRenderer.js";
-			import { data } from "./linkedin_list.js";
+			import { TWEEN } from "/dist/tween.module.min.js";
+			import { TrackballControls } from "/dist/TrackballControls.js";
+			import { CSS3DRenderer, CSS3DObject } from "/dist/CSS3DRenderer.js";
+			import { data } from "/dist/linkedin_list.js";
 
 			const result = Object.values(data).map(Object.values);
 			const merged = [].concat.apply([], result);
